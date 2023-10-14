@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 @RunWith(Parameterized.class)
 public class TestLionSex {
@@ -33,18 +34,21 @@ public class TestLionSex {
         return new Object[][] {
                 {"Самец", true},
                 {"Самка", false},
-                {"", false}
         };
     }
 
     @Test
-    public void shouldBeMane() {
-        try {
+    public void shouldBeMane() throws Exception {
             Lion lion = new Lion(sex, feline);
             boolean actual = lion.doesHaveMane();
             assertEquals(expected, actual);
-        } catch (Exception e) {
-            Assert.assertEquals(e.getMessage(), "Используйте допустимые значения пола животного - самец или самка");
-        }
+    }
+
+    @Test
+    public void testLionSexException() {
+        Exception exception = assertThrows(Exception.class, () -> new Lion("Лев", feline));
+        String expected = "Используйте допустимые значения пола животного - самец или самка";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
     }
 }

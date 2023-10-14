@@ -30,10 +30,8 @@ public class TestLion {
     @Test
     public void checkGetKittensNegative() throws Exception {
         Lion lion = new Lion("Самка", feline);
-
-        Mockito.when(feline.getKittens()).thenReturn(189);
-        Assert.assertNotEquals(1, feline.getKittens());
-        Assert.assertNotEquals(1, lion.getKittens());
+        Assert.assertNotEquals(3, feline.getKittens());
+        Assert.assertNotEquals(3, lion.getKittens());
     }
 
     @Test
